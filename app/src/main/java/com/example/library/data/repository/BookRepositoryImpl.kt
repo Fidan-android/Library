@@ -11,7 +11,12 @@ class BookRepositoryImpl(
     private val dbServiceImpl: DbServiceImpl
 ): IBookRepository {
     override fun getBooks(): ArrayList<Book> {
-        return dbServiceImpl.getBooks()
+        return ArrayList(dbServiceImpl.getBooks().map {
+            Book(
+                title = it.title,
+                author = it.author
+            )
+        })
     }
 
 }

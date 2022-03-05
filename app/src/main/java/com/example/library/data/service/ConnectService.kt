@@ -15,6 +15,7 @@ class ConnectService {
                     .open(fileName).bufferedReader().use {
                         it.readText()
                     }
+                Log.d("FILE CONTENT", jsonString)
             } catch (ex: Exception) {
                 ex.printStackTrace()
                 return ex.message!!

@@ -3,6 +3,8 @@ package com.example.library.presentation.activity.books
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.library.databinding.ActivityBooksBinding
 import com.example.library.domain.di.repository_modules.RepositoryModule
 import com.example.library.domain.di.service_modules.ServiceModule

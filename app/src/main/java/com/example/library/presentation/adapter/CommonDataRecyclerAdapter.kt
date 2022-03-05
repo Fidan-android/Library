@@ -1,5 +1,6 @@
 package com.example.library.presentation.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +34,7 @@ class CommonDataRecyclerAdapter<E>(private val bookList: ArrayList<Book>):
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun show(data: ArrayList<Book>) {
         bookList.clear()
         bookList.addAll(data)

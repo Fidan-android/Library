@@ -1,8 +1,9 @@
 package com.example.library.data.service
 
 import android.content.Context
+import android.util.Log
 import com.example.library.data.model.Library
-import com.example.library.domain.model.Book
+import com.example.library.data.model.Book
 import com.example.library.domain.service.DbService
 import com.google.gson.Gson
 
@@ -71,6 +72,7 @@ class DbServiceImpl(private val applicationContext: Context): DbService {
                 allowedChars.random()
             }
             .joinToString("")
+        Log.d("TOKEN", randomString)
         return randomString
     }
 

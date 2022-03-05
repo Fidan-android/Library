@@ -49,6 +49,12 @@ class LoginActivity : AppCompatActivity() {
                 applicationContext)
             ).get(LoginViewModel::class.java)
 
+        viewModel.getToken().observe(this) {
+            if (it != "") {
+                editor.putString("token", viewModel.getToken().value)
+                editor.commit()
+            }
+        }
 
         binding.buttonLogin.setOnClickListener {
             if (binding.login.text.toString() == "" || binding.password.text.toString() == "") {
@@ -61,8 +67,6 @@ class LoginActivity : AppCompatActivity() {
                     if (!it) {
                         showWrongMessage()
                     } else {
-                        editor.putString("token", viewModel.getToken().value)
-                        editor.commit()
                         Toast.makeText(applicationContext, "Login completed successfully", Toast.LENGTH_LONG).show()
                         handler.postDelayed({
                             startActivity(Intent(applicationContext, BooksActivity::class.java))

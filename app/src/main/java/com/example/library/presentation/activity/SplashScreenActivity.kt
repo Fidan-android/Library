@@ -17,6 +17,7 @@ import com.example.library.domain.di.use_case_modules.UseCaseModule
 import com.example.library.domain.model.Library
 import com.example.library.domain.viewmodel.SplashScreenViewModel
 import com.example.library.domain.viewmodelfactory.LibraryViewModelFactory
+import com.example.library.presentation.activity.books.BooksActivity
 import com.example.library.presentation.activity.login.LoginActivity
 
 @SuppressLint("CustomSplashScreen")
@@ -33,7 +34,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private val tokenUser by lazy {
-        this.getSharedPreferences(resources.getString(R.string.app_name), 0).getString("tokeUser", "")
+        this.getSharedPreferences(resources.getString(R.string.app_name), 0).getString("token", "")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +68,9 @@ class SplashScreenActivity : AppCompatActivity() {
                 }
             }
         } else if (!tokenUser.equals("")) {
-            print("vsdvsdv")
+            Handler(mainLooper).postDelayed({
+                showPage(BooksActivity::class.java)
+            }, 3000)
         } else {
             Handler(mainLooper).postDelayed({
                 showPage(LoginActivity::class.java)

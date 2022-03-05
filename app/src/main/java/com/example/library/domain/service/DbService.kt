@@ -1,9 +1,7 @@
 package com.example.library.domain.service
 
-import com.example.library.GlobalApplication
 import com.example.library.data.model.Library
-import com.example.library.data.service.TypeJsonString
-import com.example.library.domain.model.Book
+import com.example.library.data.model.Book
 
 interface DbService {
 
