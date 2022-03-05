@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lib_restore_password">Forgot your password? Restore it!</string>
+    <string name="lib_wrong_data">Invalid username or password</string>
+    <string name="lib_register_now">Don\'t you have an account? Register now!</string>
+    <string name="lib_register_text">Registration</string>
+    <string name="lib_re_password">Confirm password</string>
+    <string name="lib_full_name">Full name</string>
+    <string name="lib_already_login">Do you already have an account? Log in</string>
+    <string name="lib_empty_fields">Sorry, but all fields must be filled in!</string>
+    <string name="lib_wrong_passwords">Passwords must match!</string>
+    <string name="lib_wrong_phone_number">Your phone doesn\'t match the template!</string>
+    <string name="Example_author">Автор книги</string>
+</resources>
