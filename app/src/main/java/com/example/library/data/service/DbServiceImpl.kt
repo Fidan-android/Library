@@ -2,7 +2,7 @@ package com.example.library.data.service
 
 import android.content.Context
 import android.util.Log
-import com.example.library.data.model.Library
+import com.example.library.data.model.LibraryEntity
 import com.example.library.data.model.Book
 import com.example.library.domain.service.DbService
 import com.google.gson.Gson
@@ -29,7 +29,7 @@ class DbServiceImpl(private val applicationContext: Context): DbService {
         ConnectService.getJsonFromInternalStorage(applicationContext, NameOfFiles.tokens)
     }
 
-    override fun getLibraries(): List<Library> {
+    override fun getLibraries(): List<LibraryEntity> {
         return gson.fromJson(librariesString, TypeJsonString.listLibraryType)
     }
 

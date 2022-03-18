@@ -1,9 +1,9 @@
 package com.example.library.domain.repository
 
+import com.example.library.domain.model.LoginForm
+
 interface ILoginRepository {
 
-    fun checkLogin(userLogin: String): Boolean
-
-    fun getToken(userLogin: String, userPassword: String): String
+    fun logIn(user: LoginForm): String
 
 }

@@ -1,11 +1,11 @@
 package com.example.library.domain.service
 
-import com.example.library.data.model.Library
+import com.example.library.data.model.LibraryEntity
 import com.example.library.data.model.Book
 
 interface DbService {
 
-    fun getLibraries(): List<Library>
+    fun getLibraries(): List<LibraryEntity>
 
     fun checkLogin(userLogin: String): Boolean
 

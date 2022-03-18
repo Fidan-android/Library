@@ -11,16 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Library">
         <activity
-            android:name=".presentation.activity.registration.RegistrationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.activity.books.BooksActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.activity.login.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.activity.SplashScreenActivity"
+            android:name=".presentation.activity.GlobalActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

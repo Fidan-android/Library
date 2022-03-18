@@ -1,6 +1,5 @@
 package com.example.library.presentation.activity.registration
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -15,7 +14,6 @@ import com.example.library.domain.di.use_case_modules.UseCaseModule
 import com.example.library.domain.model.RegistrationForm
 import com.example.library.domain.viewmodel.RegistrationViewModel
 import com.example.library.domain.viewmodelfactory.LibraryViewModelFactory
-import com.example.library.presentation.activity.login.LoginActivity
 
 class RegistrationActivity : AppCompatActivity() {
 

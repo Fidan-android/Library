@@ -1,22 +1,28 @@
 package com.example.library.data.repository
 
-import com.example.library.data.service.DbServiceImpl
+import androidx.lifecycle.LiveData
+import com.example.library.data.mapper.LibraryMapper
+import com.example.library.data.service.AppDatabase
 import com.example.library.domain.model.Library
 import com.example.library.domain.repository.ILibrariesRepository
 
 class LibrariesRepositoryImpl(
-    private val dbServiceImpl: DbServiceImpl
+    private val appDatabase: AppDatabase,
+    private val libraryMapper: LibraryMapper
 ): ILibrariesRepository {
 
-    // еще не трогал мапперы, наверно их опять передавать в конструктор,
-    // но как интересно в мапперах создавать модельки из домейн слоя
     override fun getLibraries(): List<Library> {
-        val list = dbServiceImpl.getLibraries().map {
-            Library(
-                id = it.id,
-                name = it.name
-            )
+        val list = appDatabase.libraryDao().getLibraries().map {
+            libraryMapper.mapToModel(it)
         }
-        return list
+        return  list
+    }
+
+    override suspend fun addLibrary(library: Library) {
+        appDatabase.libraryDao().addLibrary(libraryMapper.mapToEntity(library))
+    }
+
+    override suspend fun updateLibrary(library: Library) {
+        appDatabase.libraryDao().updateLibrary(libraryMapper.mapToEntity(library))
     }
 }

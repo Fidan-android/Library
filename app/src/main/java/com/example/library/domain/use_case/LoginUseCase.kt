@@ -1,20 +1,26 @@
 package com.example.library.domain.use_case
 
+import android.content.Context
+import androidx.navigation.NavDirections
+import com.example.library.R
 import com.example.library.data.repository.LoginRepositoryImpl
+import com.example.library.domain.model.LoginForm
+import com.example.library.presentation.activity.login.LoginFragmentDirections
 
-class LoginUseCase(
-    private val userRepositoryImpl: LoginRepositoryImpl
+class LoginUseCase(private val applicationContext: Context,
+                   private val userRepositoryImpl: LoginRepositoryImpl
 ) {
-    fun executeCheckLogin(userLogin: String): Boolean {
-        return userRepositoryImpl.checkLogin(
-            userLogin = userLogin
+
+    fun logIn(user: LoginForm): String {
+        return userRepositoryImpl.logIn(
+            user = user
         )
     }
 
-    fun executeGetToken(userLogin: String, userPassword: String): String {
-        return userRepositoryImpl.getToken(
-            userLogin = userLogin,
-            userPassword = userPassword
-        )
+    fun saveToken(stringToken: String?): NavDirections {
+        val editor = applicationContext.getSharedPreferences(applicationContext.getString(R.string.app_name), 0).edit()
+        editor.putString("token", stringToken)
+        editor.apply()
+        return LoginFragmentDirections.actionLoginFragmentToBookListFragment()
     }
 }
