@@ -17,8 +17,8 @@ class UseCaseModule {
     fun loginUseCase(applicationContext: Context, userRepositoryImpl: LoginRepositoryImpl):
             LoginUseCase = LoginUseCase(applicationContext, userRepositoryImpl)
 
-    fun registrationUseCase(registrationRepositoryImpl: RegistrationRepositoryImpl):
-            RegistrationUseCase = RegistrationUseCase(registrationRepositoryImpl)
+    fun registrationUseCase(applicationContext: Context, registrationRepositoryImpl: RegistrationRepositoryImpl):
+            RegistrationUseCase = RegistrationUseCase(applicationContext, registrationRepositoryImpl)
 
     fun bookUseCase(bookRepositoryImpl: BookRepositoryImpl):
             BookUseCase = BookUseCase(bookRepositoryImpl)

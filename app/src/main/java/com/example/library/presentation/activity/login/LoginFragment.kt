@@ -13,7 +13,7 @@ import com.example.library.databinding.FragmentLoginBinding
 import com.example.library.domain.di.repository_modules.RepositoryModule
 import com.example.library.domain.di.service_modules.ServiceModule
 import com.example.library.domain.di.use_case_modules.UseCaseModule
-import com.example.library.domain.model.LoginForm
+import com.example.library.domain.model.UserForm
 import com.example.library.domain.viewmodel.LoginViewModel
 import com.example.library.domain.viewmodelfactory.LibraryViewModelFactory
 
@@ -48,7 +48,7 @@ class LoginFragment : Fragment() {
                 binding.wrongData.text = it
                 Handler(requireActivity().mainLooper).postDelayed({
                     binding.wrongData.text = ""
-                }, 2000)
+                }, 3000)
             }
         }
 
@@ -61,7 +61,7 @@ class LoginFragment : Fragment() {
         }
 
         binding.buttonLogin.setOnClickListener {
-            viewModel.logIn(LoginForm(
+            viewModel.logIn(UserForm(
                 userLogin = binding.login.toString(),
                 userPassword = binding.password.toString().hashCode())
             )

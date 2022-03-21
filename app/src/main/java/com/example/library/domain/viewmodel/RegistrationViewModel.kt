@@ -2,26 +2,27 @@ package com.example.library.domain.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.library.domain.model.RegistrationForm
+import androidx.navigation.NavDirections
+import com.example.library.domain.model.UserForm
 import com.example.library.domain.use_case.RegistrationUseCase
+import com.example.library.presentation.activity.registration.RegistrationFragmentDirections
 
 class RegistrationViewModel(
     private val registrationUseCase: RegistrationUseCase
 ): ViewModel() {
 
-    private var statusRegistration: MutableLiveData<String> = MutableLiveData("")
-    private var statusValidate: MutableLiveData<Int> = MutableLiveData(0)
+    private var actionDirections: MutableLiveData<NavDirections> = MutableLiveData(null)
+    private var wrongText: MutableLiveData<String> = MutableLiveData("")
 
-    fun getIsRegistration() = this.statusRegistration
-    fun getStatusValidate() = this.statusValidate
+    fun getActionDirections() = this.actionDirections
+    fun wrongText() = this.wrongText
 
-    fun signUp(registrationForm: RegistrationForm) {
-        statusRegistration.value = registrationUseCase.execute(registrationForm = registrationForm)
-    }
-
-    fun validatePhone(phoneNumber: String) {
-        statusValidate.value = if (registrationUseCase.validatePhoneNumber(
-                phoneNumber = phoneNumber
-            )) -1 else 0
+    fun signUp(user: UserForm) {
+        val response = registrationUseCase.execute(userForm = user)
+        if (response.isEmpty()) {
+            actionDirections.value = RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment()
+        } else {
+            wrongText.value = response
+        }
     }
 }

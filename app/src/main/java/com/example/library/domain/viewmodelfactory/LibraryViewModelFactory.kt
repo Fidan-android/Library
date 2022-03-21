@@ -35,13 +35,9 @@ class LibraryViewModelFactory(
             }
 
             RegistrationViewModel::class.java -> {
-                return RegistrationViewModel(
-                    useCaseModule.registrationUseCase(
-                        repositoryModule.getRegistrationRepository(
-                            serviceModule.getServiceImpl(applicationContext)
-                        )
-                    )
-                ) as T
+                return RegistrationViewModel(useCaseModule.registrationUseCase(applicationContext, repositoryModule.getRegistrationRepository(
+                    ServiceModule.getAppDatabase(applicationContext), MapperModule.getLoginMapper()
+                ))) as T
             }
 
             BooksViewModel::class.java -> {

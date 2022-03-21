@@ -4,14 +4,14 @@ import android.content.Context
 import androidx.navigation.NavDirections
 import com.example.library.R
 import com.example.library.data.repository.LoginRepositoryImpl
-import com.example.library.domain.model.LoginForm
+import com.example.library.domain.model.UserForm
 import com.example.library.presentation.activity.login.LoginFragmentDirections
 
 class LoginUseCase(private val applicationContext: Context,
                    private val userRepositoryImpl: LoginRepositoryImpl
 ) {
 
-    fun logIn(user: LoginForm): String {
+    fun logIn(user: UserForm): String {
         return userRepositoryImpl.logIn(
             user = user
         )

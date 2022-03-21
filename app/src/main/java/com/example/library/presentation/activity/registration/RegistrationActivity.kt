@@ -48,16 +48,10 @@ class RegistrationActivity : AppCompatActivity() {
             } else if (binding.password.text.toString() != binding.rePassword.text.toString()) {
                 showWrongMessage(binding.wrongPassword)
             } else {
-                viewModel.validatePhone(binding.login.text.toString())
 
                 viewModel.getStatusValidate().observe(this) {
                     when(it) {
                         -1 -> {
-                            viewModel.signUp(RegistrationForm(
-                                fullName = binding.fullName.text.toString(),
-                                login = binding.login.text.toString(),
-                                password = binding.password.text.toString(),
-                            ))
 
                             viewModel.getIsRegistration().observe(this) { response ->
                                 when(response) {

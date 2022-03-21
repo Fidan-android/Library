@@ -1,16 +1,16 @@
 package com.example.library.data.repository
 
-import com.example.library.data.mapper.LoginMapper
+import com.example.library.data.mapper.UserMapper
 import com.example.library.data.service.AppDatabase
-import com.example.library.domain.model.LoginForm
+import com.example.library.domain.model.UserForm
 import com.example.library.domain.repository.ILoginRepository
 
 class LoginRepositoryImpl(
     private val appDatabase: AppDatabase,
-    private val loginMapper: LoginMapper
+    private val loginMapper: UserMapper
 ): ILoginRepository {
 
-    override fun logIn(user: LoginForm): String {
+    override fun logIn(user: UserForm): String {
         val response = appDatabase.userDao().logIn(loginMapper.mapToEntity(user).userLogin) ?: return "User not found"
         return if (response.hashPassword != user.userPassword) {
             "Invalid username or password"

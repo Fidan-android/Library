@@ -1,7 +1,9 @@
 package com.example.library.domain.model
 
 data class RegistrationForm(
-    val login: String,
-    val fullName: String,
-    val password: String
+    val id: Int = 0,
+    val userLogin: String,
+    val userName: String,
+    val userPassword: Int,
+    val reUserPassword: Int = 0
 )
