@@ -15,7 +15,7 @@ class GlobalApplication: Application() {
         super.onCreate()
         appContext = applicationContext
 
-        GlobalScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
             val appDb: AppDatabase = AppDatabase.getAppDataBase(applicationContext)!!
 
             if (appDb.libraryDao().getLibraries().isEmpty()) {
@@ -23,9 +23,6 @@ class GlobalApplication: Application() {
                 appDb.libraryDao().addLibrary(LibraryEntity(0, "Библиотека 2", false))
                 appDb.libraryDao().addLibrary(LibraryEntity(0, "Библиотека 3", false))
                 appDb.libraryDao().addLibrary(LibraryEntity(0, "Библиотека 4", false))
-            }
-            appDb.libraryDao().getLibraries().map {
-                Log.d("DATA", it.name)
             }
         }
     }

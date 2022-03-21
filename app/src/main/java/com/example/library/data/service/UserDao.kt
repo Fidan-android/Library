@@ -6,7 +6,10 @@ import com.example.library.data.model.UserEntity
 
 @Dao
 interface UserDao {
-    @Query("SELECT * FROM UserEntity WHERE userLogin=:userLogin")
+    @Query("SELECT * FROM UserEntity")
+    fun getUsers(): List<UserEntity>?
+
+    @Query("SELECT * FROM UserEntity WHERE userLogin LIKE :userLogin")
     fun logIn(userLogin: String): UserEntity?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

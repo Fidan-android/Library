@@ -10,9 +10,9 @@ class RegistrationUseCase(
     private val applicationContext: Context,
     private val registrationRepositoryImpl: RegistrationRepositoryImpl
 ) {
-    fun execute(userForm: UserForm): String {
+    suspend fun execute(userForm: UserForm): String {
 
-        if (userForm.userLogin.isEmpty() || userForm.userName.isEmpty() || userForm.userPassword == 0) {
+        if (userForm.userLogin == "" || userForm.userName == "" || userForm.userPassword == 0) {
             return applicationContext.getString(R.string.lib_empty_fields)
         }
 
@@ -20,7 +20,7 @@ class RegistrationUseCase(
             return applicationContext.getString(R.string.lib_wrong_passwords)
         }
 
-        if (this.validatePhoneNumber(userForm.userLogin)) {
+        if (!this.validatePhoneNumber(userForm.userLogin)) {
             return applicationContext.getString(R.string.lib_wrong_phone_number)
         }
 

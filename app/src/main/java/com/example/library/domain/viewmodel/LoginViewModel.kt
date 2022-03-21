@@ -20,13 +20,15 @@ class LoginViewModel(
     fun wrongText() = wrongText
 
     fun logIn(user: UserForm) {
-        if (user.userLogin.isEmpty() || user.userPassword == 0) {
+        if (user.userLogin == "" || user.userPassword == 0) {
             wrongText.value = "Sorry, but all fields must be filled in!"
-        }
-        val response = useCase.logIn(user)
-        when(response.lowercase(Locale.getDefault())) {
-            "user not found", "invalid username or password" -> wrongText.value = response
-            else -> token.value = response
+        } else {
+            val response = useCase.logIn(user)
+            when (response.lowercase(Locale.getDefault())) {
+                "user not found" -> wrongText.value = response
+                "invalid username or password" -> wrongText.value = response
+                else -> token.value = response
+            }
         }
     }
 

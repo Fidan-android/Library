@@ -32,7 +32,9 @@
             app:destination="@id/registrationFragment" />
         <action
             android:id="@+id/action_loginFragment_to_bookListFragment"
-            app:destination="@id/bookListFragment" />
+            app:destination="@id/bookListFragment"
+            app:popUpTo="@id/main_nav"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"

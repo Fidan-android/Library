@@ -62,8 +62,8 @@ class LoginFragment : Fragment() {
 
         binding.buttonLogin.setOnClickListener {
             viewModel.logIn(UserForm(
-                userLogin = binding.login.toString(),
-                userPassword = binding.password.toString().hashCode())
+                userLogin = binding.login.text.toString(),
+                userPassword = binding.password.text.toString().hashCode())
             )
         }
 

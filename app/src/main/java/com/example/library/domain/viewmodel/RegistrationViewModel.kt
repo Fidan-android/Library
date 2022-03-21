@@ -17,12 +17,12 @@ class RegistrationViewModel(
     fun getActionDirections() = this.actionDirections
     fun wrongText() = this.wrongText
 
-    fun signUp(user: UserForm) {
+    suspend fun signUp(user: UserForm) {
         val response = registrationUseCase.execute(userForm = user)
-        if (response.isEmpty()) {
-            actionDirections.value = RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment()
+        if (response == "") {
+            actionDirections.postValue(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
         } else {
-            wrongText.value = response
+            wrongText.postValue(response)
         }
     }
 }
