@@ -1,6 +1,6 @@
-package com.example.library.domain.model
+package com.example.library.data.model
 
-data class Book(
+data class BookNetwork(
     val id: Int = 0,
     val title: String,
     val subtitle: String?,

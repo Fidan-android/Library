@@ -1,13 +1,12 @@
 package com.example.library.domain.di.repository_modules
 
+import com.example.library.data.mapper.ApiMapper
+import com.example.library.data.mapper.BookMapper
 import com.example.library.data.mapper.LibraryMapper
 import com.example.library.data.mapper.UserMapper
-import com.example.library.data.repository.BookRepositoryImpl
-import com.example.library.data.repository.LibrariesRepositoryImpl
-import com.example.library.data.repository.LoginRepositoryImpl
-import com.example.library.data.repository.RegistrationRepositoryImpl
+import com.example.library.data.repository.*
 import com.example.library.data.service.AppDatabase
-import com.example.library.data.service.DbServiceImpl
+import com.example.library.data.service.api.ApiHelper
 
 class RepositoryModule() {
 
@@ -20,6 +19,9 @@ class RepositoryModule() {
     fun getRegistrationRepository(appDatabase: AppDatabase, loginMapper: UserMapper):
             RegistrationRepositoryImpl = RegistrationRepositoryImpl(appDatabase, loginMapper)
 
-    fun getBookRepository(dbServiceImpl: DbServiceImpl):
-            BookRepositoryImpl = BookRepositoryImpl(dbServiceImpl)
+    fun getBookRepository(appDatabase: AppDatabase, bookMapper: BookMapper):
+            BookRepositoryImpl = BookRepositoryImpl(appDatabase, bookMapper)
+
+    fun getApiRepository(apiHelper: ApiHelper, apiMapper: ApiMapper):
+            ApiRepositoryImpl = ApiRepositoryImpl(apiHelper, apiMapper)
 }

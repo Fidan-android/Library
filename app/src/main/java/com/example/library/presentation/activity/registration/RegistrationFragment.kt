@@ -66,16 +66,14 @@ class RegistrationFragment : Fragment() {
         }
 
         binding.buttonRegistration.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                viewModel.signUp(
-                    UserForm(
-                        userName = binding.fullName.text.toString(),
-                        userLogin = binding.login.text.toString(),
-                        userPassword = binding.password.text.toString().hashCode(),
-                        reUserPassword = binding.rePassword.text.toString().hashCode()
-                    )
+            viewModel.signUp(
+                UserForm(
+                    userName = binding.fullName.text.toString(),
+                    userLogin = binding.login.text.toString(),
+                    userPassword = binding.password.text.toString().hashCode(),
+                    reUserPassword = binding.rePassword.text.toString().hashCode()
                 )
-            }
+            )
         }
 
         return binding.root

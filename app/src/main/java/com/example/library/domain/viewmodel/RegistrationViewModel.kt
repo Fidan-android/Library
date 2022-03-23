@@ -6,6 +6,9 @@ import androidx.navigation.NavDirections
 import com.example.library.domain.model.UserForm
 import com.example.library.domain.use_case.RegistrationUseCase
 import com.example.library.presentation.activity.registration.RegistrationFragmentDirections
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class RegistrationViewModel(
     private val registrationUseCase: RegistrationUseCase
@@ -17,12 +20,14 @@ class RegistrationViewModel(
     fun getActionDirections() = this.actionDirections
     fun wrongText() = this.wrongText
 
-    suspend fun signUp(user: UserForm) {
-        val response = registrationUseCase.execute(userForm = user)
-        if (response == "") {
-            actionDirections.postValue(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
-        } else {
-            wrongText.postValue(response)
-        }
+     fun signUp(user: UserForm) {
+         CoroutineScope(Dispatchers.IO).launch {
+             val response = registrationUseCase.execute(userForm = user)
+             if (response == "") {
+                 actionDirections.postValue(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
+             } else {
+                 wrongText.postValue(response)
+             }
+         }
     }
 }

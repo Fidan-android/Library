@@ -1,6 +1,8 @@
 package com.example.library.domain.viewmodelfactory
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.library.domain.di.mapper_modules.MapperModule
@@ -20,6 +22,7 @@ class LibraryViewModelFactory(
     private val applicationContext: Context
 ): ViewModelProvider.Factory {
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         when(modelClass) {
             SplashScreenViewModel::class.java -> {
@@ -41,13 +44,15 @@ class LibraryViewModelFactory(
             }
 
             BooksViewModel::class.java -> {
-                return BooksViewModel(
-                    useCaseModule.bookUseCase(
-                        repositoryModule.getBookRepository(
-                            serviceModule.getServiceImpl(applicationContext)
-                        )
+                return BooksViewModel(useCaseModule.bookUseCase(applicationContext,
+                    repositoryModule.getBookRepository(
+                        ServiceModule.getAppDatabase(applicationContext),
+                        MapperModule.getBookMapper()),
+                    repositoryModule.getApiRepository(
+                        ServiceModule.getApiHelper(),
+                        MapperModule.getApiMapper()
                     )
-                ) as T
+                )) as T
             }
         }
         throw IllegalArgumentException("unknown model class $modelClass")

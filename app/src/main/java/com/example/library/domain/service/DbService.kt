@@ -1,7 +1,7 @@
 package com.example.library.domain.service
 
 import com.example.library.data.model.LibraryEntity
-import com.example.library.data.model.Book
+import com.example.library.data.model.BookNetwork
 
 interface DbService {
 
@@ -13,7 +13,7 @@ interface DbService {
 
     fun createAccount(login: String, fullName: String, password: String): String
 
-    fun getBooks(): ArrayList<Book>
+    fun getBooks(): ArrayList<BookNetwork>
 
     fun saveBook(): Boolean
 }

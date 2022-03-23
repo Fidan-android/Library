@@ -9,29 +9,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.library.R
 import com.example.library.domain.model.Book
 
-class CommonDataRecyclerAdapter<E>(private val bookList: ArrayList<Book>):
-    RecyclerView.Adapter<CommonDataRecyclerAdapter<E>.CommonDataViewHolder<E>>(){
+class CommonDataRecyclerAdapter(private val bookList: ArrayList<Book>):
+    RecyclerView.Adapter<CommonDataRecyclerAdapter.CommonDataViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonDataViewHolder<E> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonDataViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.common_data_item, parent, false)
         return CommonDataViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CommonDataViewHolder<E>, position: Int) {
+    override fun onBindViewHolder(holder: CommonDataViewHolder, position: Int) {
         holder.bind(bookList[position])
     }
 
     override fun getItemCount() = bookList.size
 
-    inner class CommonDataViewHolder<E>(view: View): RecyclerView.ViewHolder(view) {
+    inner class CommonDataViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         private val nameOfBook = itemView.findViewById<TextView>(R.id.book_name)
         private val authorOfBook = itemView.findViewById<TextView>(R.id.book_author)
 
         fun bind(book: Book) {
             nameOfBook.text = book.title
-            authorOfBook.text = book.author
-        }
+            authorOfBook.text = book.author        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

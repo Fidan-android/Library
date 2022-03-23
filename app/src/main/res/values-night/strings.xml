@@ -11,4 +11,5 @@
     <string name="lib_wrong_passwords">Passwords must match!</string>
     <string name="lib_wrong_phone_number">Your phone doesn\'t match the template!</string>
     <string name="Example_author">Автор книги</string>
+    <string name="no_internet">Please check your internet connection!</string>
 </resources>

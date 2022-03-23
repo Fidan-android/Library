@@ -1,10 +1,7 @@
 package com.example.library.domain.di.use_case_modules
 
 import android.content.Context
-import com.example.library.data.repository.BookRepositoryImpl
-import com.example.library.data.repository.LibrariesRepositoryImpl
-import com.example.library.data.repository.LoginRepositoryImpl
-import com.example.library.data.repository.RegistrationRepositoryImpl
+import com.example.library.data.repository.*
 import com.example.library.domain.use_case.BookUseCase
 import com.example.library.domain.use_case.LoginUseCase
 import com.example.library.domain.use_case.SplashScreenUseCase
@@ -20,6 +17,6 @@ class UseCaseModule {
     fun registrationUseCase(applicationContext: Context, registrationRepositoryImpl: RegistrationRepositoryImpl):
             RegistrationUseCase = RegistrationUseCase(applicationContext, registrationRepositoryImpl)
 
-    fun bookUseCase(bookRepositoryImpl: BookRepositoryImpl):
-            BookUseCase = BookUseCase(bookRepositoryImpl)
+    fun bookUseCase(applicationContext: Context, bookRepositoryImpl: BookRepositoryImpl, apiRepositoryImpl: ApiRepositoryImpl):
+            BookUseCase = BookUseCase(applicationContext, bookRepositoryImpl, apiRepositoryImpl)
 }

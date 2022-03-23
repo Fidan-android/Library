@@ -1,21 +1,25 @@
 package com.example.library.data.repository
 
-import com.example.library.data.service.DbServiceImpl
+import com.example.library.data.mapper.BookMapper
+import com.example.library.data.service.AppDatabase
 import com.example.library.domain.model.Book
-import com.example.library.domain.model.RegistrationForm
 import com.example.library.domain.repository.IBookRepository
-import com.example.library.domain.repository.ILoginRepository
-import com.example.library.domain.repository.IRegistrationRepository
 
 class BookRepositoryImpl(
-    private val dbServiceImpl: DbServiceImpl
+    private val appDatabase: AppDatabase,
+    private val bookMapper: BookMapper
 ): IBookRepository {
-    override fun getBooks(): ArrayList<Book> {
-        return ArrayList(dbServiceImpl.getBooks().map {
-            Book(
-                title = it.title,
-                author = it.author
-            )
+
+    override fun getBooks(): List<Book>? {
+        val list = appDatabase.bookDao().getBooks()?.map {
+            bookMapper.mapToModel(it)
+        }
+        return  list
+    }
+
+    override suspend fun insertBooks(books: List<Book>) {
+        appDatabase.bookDao().insertBooks(books.map {
+            bookMapper.mapToEntity(it)
         })
     }
 
