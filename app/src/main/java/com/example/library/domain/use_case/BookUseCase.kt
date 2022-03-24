@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi
 import com.example.library.data.repository.ApiRepositoryImpl
 import com.example.library.data.repository.BookRepositoryImpl
 import com.example.library.domain.model.Book
+import com.example.library.presentation.adapter.CommonDataRecyclerAdapter
 
 
 class BookUseCase(
@@ -15,13 +16,18 @@ class BookUseCase(
     private val apiRepositoryImpl: ApiRepositoryImpl
 ) {
 
-    suspend fun execute(): ArrayList<Book> {
-        var books = bookRepositoryImpl.getBooks()
-
-        if (books == null || books.isEmpty()) {
-            books = apiRepositoryImpl.getBooks()
-            bookRepositoryImpl.insertBooks(books)
+    fun getBooksFromRoom(): ArrayList<Book> {
+        val books = bookRepositoryImpl.getBooks()
+        return if (books == null) ({
+            emptyList<Book>()
+        }) as ArrayList<Book> else {
+            ArrayList(books.map { it })
         }
+    }
+
+    suspend fun downloadBooks(): ArrayList<Book> {
+        val books = apiRepositoryImpl.getBooks()
+        bookRepositoryImpl.insertBooks(books)
 
         return ArrayList(books.map { it })
     }
@@ -32,4 +38,5 @@ class BookUseCase(
         return cm!!.activeNetwork != null && cm.activeNetworkInfo!!.isConnected
     }
 
+    fun getAdapter(list: ArrayList<Book>): CommonDataRecyclerAdapter = CommonDataRecyclerAdapter(list)
 }

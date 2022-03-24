@@ -2,6 +2,7 @@ package com.example.library.presentation.activity.books
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.transition.Visibility
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -43,14 +44,24 @@ class BookListFragment : Fragment() {
                 requireActivity().applicationContext)
             )[BooksViewModel::class.java]
 
+        viewModel.getRecyclerAdapter().observe(viewLifecycleOwner) {
+            binding.booksRecycler.adapter = it
+        }
+
         viewModel.getIsNetwork().observe(viewLifecycleOwner) {
             if (it) {
-                viewModel.downloadBooks()
+                Handler(requireActivity().mainLooper).postDelayed({
+                    binding.noInternetLayout.visibility = View.GONE
+                    viewModel.downloadBooks()
+                }, 3000)
+            } else {
+                binding.noInternetLayout.visibility = View.VISIBLE
             }
         }
 
         viewModel.getBooks().observe(viewLifecycleOwner) {
-            binding.booksRecycler.adapter = CommonDataRecyclerAdapter(it)
+            viewModel.createAdapter(it)
+
         }
 
         return binding.root

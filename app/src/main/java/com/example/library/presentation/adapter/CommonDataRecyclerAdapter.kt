@@ -30,7 +30,8 @@ class CommonDataRecyclerAdapter(private val bookList: ArrayList<Book>):
 
         fun bind(book: Book) {
             nameOfBook.text = book.title
-            authorOfBook.text = book.author        }
+            authorOfBook.text = book.author
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
