@@ -38,5 +38,7 @@ class BookUseCase(
         return cm!!.activeNetwork != null && cm.activeNetworkInfo!!.isConnected
     }
 
-    fun getAdapter(list: ArrayList<Book>): CommonDataRecyclerAdapter = CommonDataRecyclerAdapter(list)
+    fun getAdapter(list: ArrayList<Book>, onClickListener: (Book) -> Unit): CommonDataRecyclerAdapter = CommonDataRecyclerAdapter(list) {
+        onClickListener(it)
+    }
 }

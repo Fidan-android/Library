@@ -40,14 +40,18 @@ class BooksViewModel(
     }
 
     fun downloadBooks() {
-        viewModelScope.launch(Dispatchers.IO) {
-            books.postValue(bookUseCase.downloadBooks())
+        if (books.value?.isEmpty() == true) {
+            viewModelScope.launch(Dispatchers.IO) {
+                books.postValue(bookUseCase.downloadBooks())
+            }
         }
     }
 
-    fun createAdapter(list: ArrayList<Book>) {
+    fun createAdapter(list: ArrayList<Book>, onClickListener: (Book) -> Unit) {
         if (recyclerAdapter.value == null) {
-            recyclerAdapter.value = bookUseCase.getAdapter(list)
+            recyclerAdapter.value = bookUseCase.getAdapter(list) {
+                onClickListener(it)
+            }
         } else {
             recyclerAdapter.value!!.show(list)
         }

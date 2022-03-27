@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/Library/app/src/main/res/drawable-anydpi-v24/ic_book.xml" value="0.1075" />
+        <entry key="..\:/Projects/Library/app/src/main/res/drawable/border_background.xml" value="0.1665" />
         <entry key="..\:/Projects/Library/app/src/main/res/layout/activity_books.xml" value="0.13703703703703704" />
         <entry key="..\:/Projects/Library/app/src/main/res/layout/activity_global.xml" value="0.22520852641334568" />
         <entry key="..\:/Projects/Library/app/src/main/res/layout/activity_login.xml" value="0.33" />

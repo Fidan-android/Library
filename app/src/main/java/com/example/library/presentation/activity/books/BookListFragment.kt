@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -49,9 +50,9 @@ class BookListFragment : Fragment() {
         }
 
         viewModel.getIsNetwork().observe(viewLifecycleOwner) {
+            binding.noInternetLayout.visibility = View.GONE
             if (it) {
                 Handler(requireActivity().mainLooper).postDelayed({
-                    binding.noInternetLayout.visibility = View.GONE
                     viewModel.downloadBooks()
                 }, 3000)
             } else {
@@ -60,7 +61,9 @@ class BookListFragment : Fragment() {
         }
 
         viewModel.getBooks().observe(viewLifecycleOwner) {
-            viewModel.createAdapter(it)
+            viewModel.createAdapter(it) { book ->
+                Toast.makeText(context, book.title, Toast.LENGTH_LONG).show()
+            }
 
         }
 
